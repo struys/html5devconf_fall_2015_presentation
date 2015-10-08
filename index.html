@@ -24,6 +24,9 @@
                     <h2>Yelp's Mission</h2>
                     <p>Connecting people with great local businesses.</p>
                     <img style="width:50%" src="assets/yelp_mission.png">
+                    <aside class="notes">
+                        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+                    </aside>
                 </section>
                 <section class="center">
                     <h2 class="center">People Scale >> Web Scale</h2>
@@ -326,6 +329,7 @@
         </div>
 
         <script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
         <script src="bower_components/reveal.js/js/reveal.min.js"></script>
         <script src="bower_components/highlightjs/highlight.pack.js"></script>
         <script src="bower_components/chartist/dist/chartist.js"></script>
@@ -337,6 +341,7 @@
 
             $('section.title-slide')
                 .attr('data-background', "assets/title_background.png");
+
             Reveal.initialize({
                 history: true,
                 transition: 'linear',
@@ -346,8 +351,13 @@
                 keyboard: {
                     39: 'next',
                     37: 'prev'
-                }
+                },
+                dependencies: [
+                    { src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true }
+                ]
             });
+
+
             $('section.left-align').css('text-align', 'left').addClass('center');
             hljs.initHighlightingOnLoad();
             $('.slide-background').css('background-position', '50% 100%');
