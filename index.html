@@ -19,122 +19,292 @@
                 <section class="title-slide">
                     <h2 style="margin-top: 10%">Frontend Services</h2>
                     <p>@kenstruys</p>
-                </section>
-                <section class="center">
-                    <h2>Yelp's Mission</h2>
-                    <p>Connecting people with great local businesses.</p>
-                    <img style="width:50%" src="assets/yelp_mission.png">
                     <aside class="notes">
-                        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+<pre>
+- Hello, I'm Ken Struys and I'm an Engineering Manager at Yelp
+- Today I'm going to talk about how we're scaling our engineering team Services
+- more specifically services created for Frontend Web Application
+</pre>
                     </aside>
                 </section>
                 <section class="center">
-                    <h2 class="center">People Scale >> Web Scale</h2>
+                    <h2>Yelp's Mission</h2>
+                    <p>Connecting people with great local businesses</p>
+                    <img style="width:50%" src="assets/yelp_mission.png">
+                    <aside class="notes">
+<pre>
+- Yelp is a app and site that connects people to get local businesses
+- Making those connections on a global scale across multiple platforms requires
+a large engineering team
+- Being able to add additional engineers to the team is a requirement to
+accomplish our mission
+</pre>
+                    </aside>
+                </section>
+                <section>
+                        <img src="assets/monolith-diagram.png">
+                    <aside class="notes">
+<pre>
+- Today we're going to talk about monolithic application
+- Every company starts as one
+- They sneak up very quickly as a problem
+- My goal today is to help you recongize the symtoms
+- Provide suggestions to help
+
+- So, what are the biggest issues we've seen
+</pre>
+                    </aside>
                 </section>
                 <section class="center">
-                    <h2 class="center">Development Cycle</h2>
-                </section>
-                <section class="center">
-                    <h2 class="center">Cut a Branch</h2>
-                </section>
-                <section class="center">
-                    <h2 class="center">Write Code</h2>
-                </section>
-                <section class="center">
-                    <h2 class="center">Code Review</h2>
-                </section>
-                <section class="center">
-                    <h2 class="center">Deploy To Production</h2>
-                </section>
-                <section class="center" data-background-image="assets/andy.gif" style="color:white; -webkit-text-stroke: 2px #111; font-size:2em;">
-                    <div class="fragment">
-                        <h2 class="center" style="color:white; -webkit-text-stroke: 2px #111; font-size:2em;">New Devs</h2>
-                        <p class="center">Production Within A Week</p>
-                    </div>
+                    <h2 class="center">Team Growth</h2>
+                    <aside class="notes">
+<pre>
+- If you're company does well, engineering will grow
+- Yelp grew and is still growing
+- Our monolith has been a problem
+</pre>
+                    </aside>
                 </section>
                 <section class="left-align">
-                    <h2>Deployment</h2>
+                    <h2>Development</h2>
                     <ul>
-                        <li>Make a branch with changes</li>
-                        <li>Run the build/tests</li>
-                        <li>Deploy to production</li>
-                        <li>On failure, deploy previous version</li>
-                        <li>Repeat</li>
+                        <li>Write Code/Tests</li>
+                        <li>Run Build/Tests</li>
+                        <li>Code Review</li>
+                        <li>Merge</li>
                     </ul>
+                    <aside class="notes">
+<pre>
+- At yelp, all development is done in git feature branches
+
+In those git branches engineers:
+- Write code and tests for their code
+- Run builds and regression tests
+- Have their features and code reviewed by peers
+- and finally,
+- Merge their branch into a branch for deployment
+</pre>
+                    </aside>
+                </section>
+                <section class="center" data-background-image="assets/boat-carrier.png">
+                    <h2>
+                        <span style="padding: 0.5em; border-radius: 0.5em; background-color: #3b65a7; color:#fff;">Ship it</span>
+                    </h2>
+<aside class="notes">
+<pre>
+- We take a set of developer changes and deploy them together to production
+- Until a feature branch ships, the development process doesn't matter
+- When a feature ships, that's where engineers actually impact local business
+</pre>
+</aside>
+                </section>
+                <section class="center" data-background-image="assets/andy.gif">
+<aside class="notes">
+<pre>
+- Engineers feel great every time they see their code reach production
+- The higher the frequency you can release code, the more often an engineer will be happy
+
+- Shipping often is so ingrained in our culture,
+- we make sure every engineer gets something in production in their first week
+</pre>
+</aside>
+                </section>
+                <section data-background-image="assets/shipit.gif">
+<aside class="notes">
+<pre>
+- Unfortunately when shipping multiple branches together to production
+- In some cases it's nessisary to revert the entire deploy branch
+- We've observed it's become more difficult as we've grown
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <h2 class="center" style="text-align:center; font-size:1.5em">
+                        `99%`
+                    </h2>
+                    <p>Chance a Branch is Bug Free</p>
+<aside class="notes">
+<pre>
+- The reason it's become worse over time is really easy to understand
+- Lets say you have great engineers, and the probability
+- a single engineers branch is bug free is 99%
+- Don't get me wrong, the engineers at Yelp as amazing,
+- but even our best probably don't get to 99%
+- I'm probably being generous
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <h2 class="center" style="text-align:center; font-size:1.5em">
+                        `99% * 99% = 98%`
+                    </h2>
+                    <p>2 Bug Free Branches</p>
+<aside class="notes">
+<pre>
+- When you take two engineers and put them into the same deployment
+- The overall probability of success goes down by a small amount
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <h2 class="center" style="text-align:center; font-size:1.5em">
+                        `99%^30 = 74%`
+                    </h2>
+                    <p>30 Bug Free Branches</p>
+<aside class="notes">
+<pre>
+- If you take 30 branches and deploy them
+- The overall probability of success starts to get really low
+</pre>
+</aside>
+                </section>
+                <section class="center graph">
+                    <div class="ct-chart"></div>
+                    <h2 class="center" style="text-align:center; font-size:1.5em">
+                        `99%^n`
+                    </h2>
+                    <p class="center" style="text-align:center;">
+                        `n > 500 = 0`
+                    </p>
+<aside class="notes">
+<pre>
+- This is what's called an exponential decay function
+
+- If you continue to grow, it just gets worse
+
+- Monolith applications fall into this trap and
+it goes from a minor annoyance to a serious problem
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <h2>Monolithic Code Changes</h2>
+<aside class="notes">
+<pre>
+- Another big reason monolith aren't great is,
+- making large code migrations is awful for a single engineer
+- They deal with merge conflicts
+- and they don't ship very often
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <img src="assets/bootstrap.png">
+<aside class="notes">
+<pre>
+- If you've ever gone through a migration like bootstrap 2 to 3 in a million line codebase
+- you know how awful this can be
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <img src="assets/whats-removed.png">
+<aside class="notes">
+<pre>
+- it can often be unclear what you should do.
+- In many cases it requires coordination with many teams
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
                     <h2>yelp-main</h2>
                     <ul>
-                        <li>Primary codebase (monolith)</li>
+                        <li>Yelp's monolith</li>
                         <li>Mostly Python</li>
-                        <li>MVC web apps</li>
+                        <li>MVC Sites</li>
                         <li>Offline batches</li>
                     </ul>
+<aside class="notes">
+<pre>
+- We have a monolith at Yelp
+- Mostly python code
+- with a handful of different MVC Sites
+- Sites for business owners, consumers like yourselves
+- and administrative sites
+- and scripts that run periodically called batches
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
-                    <h2>Yelp 2011</h2>
+                    <h2>yelp-main 2011</h2>
                     <ul>
-                        <li>60 Developers</li>
+                        <li>60 Engineers</li>
                         <li>2 scheduled daily deploys</li>
                         <li>5 - 8 changes per deploy</li>
-                        <li>20,000 Tests, 20 Selenium Tests</li>
                     </ul>
+
+<aside class="notes">
+<pre>
+- When I first joined Yelp, the monoith worked well
+- We had around 60 engineers
+- We deployed to product twice a day, with 5-8 changes per deployment
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
-                    <h2>Yelp 2011-2013</h2>
+                    <h2>yelp-main 2011-2013</h2>
                     <ul>
-                        <li>60 &rarr; 200 Developers</li>
+                        <li>60 &rarr; 200 Engineer</li>
                         <li>More products, code, tests</li>
-                        <li>3 Scheduled daily deploys</li>
+                        <li>3 scheduled daily deploys</li>
                     </ul>
+
+<aside class="notes">
+<pre>
+- from 2011 to 2013 we grew a lot
+- With more engineers, more products, more code and more tests
+- More tests can also slow down a deployment if you don't build
+- a sophisticated infrastructure to support all those tests
+- We managed to get up to 3 deloys to support the growth
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
                     <h2>Deployments Get Scary</h2>
                     <ul>
                         <li>30+ changes per deploy</li>
                         <li>50,000 Tests, 200 Selenium Tests</li>
-                        <li>No dev knows every error case</li>
+                        <li>No one dev knows every error case</li>
                         <li>Rollbacks start to become common</li>
                     </ul>
+
+<aside class="notes">
+<pre>
+- That's around the time when deployments and code changes got scary
+- We became more paranoid with tests
+- No once can possible know how things could break
+- If you were working on search and you're on ads,
+- You might break something in their code and not know
+
+- And rollbacks start to become more common
+</pre>
+</aside>
                 </section>
                 <section class="center">
-                    <h2 class="center" style="text-align:center; font-size:1.5em">
-                        `(99/100) * 100% = 99%`
-                    </h2>
-                    <p>99% Chance a Branch is Bug Free</p>
-                </section>
-                <section class="center">
-                    <h2 class="center" style="text-align:center; font-size:1.5em">
-                        `(99/100 * 99/100) * 100% = 98%`
-                    </h2>
-                    <p>2 Bug Free Branches</p>
-                </section>
-                <section class="center">
-                    <h2 class="center" style="text-align:center; font-size:1.5em">
-                        `(99/100)^30 * 100% = 74%`
-                    </h2>
-                    <p>30 Bug Free Branches</p>
-                </section>
-                <section class="center graph">
-                    <h2>This Isn't Working</h2>
-                    <div class="ct-chart"></div>
-                <h2 class="center" style="text-align:center; font-size:1.5em">
-                    `(99/100)^n * 100%`
-                </h2>
-                <p class="center" style="text-align:center;">
-                    `n > 500 = 0`
-                </p>
-                </section>
-                <section class="center">
-                    <h2 class="center">Search</h2>
+                    <h2>Services Might Help</h2>
+<aside class="notes">
+<pre>
+- Looking at the rest of the industry
+- people suggested services could help with the scaling issue
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
                     <h2>What is a Service?</h2>
                     <ul>
-                        <li>A component that provides a service to other services</li>
-                        <li>Often done via HTTP</li>
-                        <li>For Example: The Facebook API</li>
+                        <li>Provides a service to other services</li>
+                        <li>Often done via HTTP, Thrift, protobuff</li>
+                        <li>Example: The Facebook API</li>
                     </ul>
+
+<aside class="notes">
+<pre>
+- So what is a service?
+- Provides a service to other services
+- Communication between services is done with HTTP
+- Think something like the Facebook API. Yelp talks to Facebook via and API.
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
                     <h2>How to Service</h2>
@@ -143,151 +313,457 @@
                         <li>Own set of tests</li>
                         <li>Own deployment</li>
                         <li>Backwards compatible</li>
-                        <li>Share code via packages</li>
+                        <li>Share code via Libraries</li>
                     </ul>
+
+<aside class="notes">
+<pre>
+- Services typically use a separate git repo
+- Have a set of test to ensure it's working as expected
+- Deploys independently from other services
+- Backwards compatiable changes
+- Share code between services with libraries
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
-                    <h2>What is a Package?</h2>
+                    <h2>What is a Library?</h2>
                     <ul>
                         <li>A collection of functions/classes/values</li>
                         <li>Have their own build/tests</li>
-                        <li>Packages can depend on other packages</li>
-                        <li>Multiple services can depend on packages</li>
-                        <li>Packages are versioned</li>
-                        <li>For Example: jQuery</li>
+                        <li>Libraries can depend on other libraries</li>
+                        <li>Multiple services can depend on libraries</li>
+                        <li>Libraries are versioned</li>
+                        <li>Example: jQuery</li>
                     </ul>
+<aside class="notes">
+<pre>
+- A library is similar to a service but it provides functions, classes, and values
+- to services
+- Similar to services they have their own set of tests
+- A both services and libraries can depend on other libaries
+- Libraries are versioned to allow people to use both old and new copies
+- jQuery is a great example. You might use jQuery 1.9 and I use 1.8.
+</pre>
+</aside>
+                </section>
+                <section data-transition="fade">
+                    <img src="assets/monolith-diagram.png">
+<aside class="notes">
+<pre>
+- Great, we know what services are
+- And if you look at your monolith, you can probably break the code into a couple categories
+of things to service
+- For us we thought about Routing, Frontends, Backend/Business Logic and Storage
+
+- Now What?...
+- If you look this stuff up online
+- you mostly find talks where people do this:
+- "Well, had this monolith"
+</pre>
+</aside>
+                </section>
+                <section class="center" data-transition="none">
+                    <span>
+                        <p style="margin: auto; font-size:3em;">???</p>
+                    </span>
+<aside class="notes">
+<pre>
+"It was embarsing"
+</pre>
+</aside>
+                </section>
+                <section data-transition="none">
+                    <div style="height:607px; width:995px; ">
+                        <img style="position:absolute; display:block; float:left;" src="assets/ideal-diagram.png">
+                        <img class="fragment" style="position:absolute; display:block; float:left;" src="assets/site-done.png">
+                    </div>
+<aside class="notes">
+<pre>
+- And... then we had services
+- Wait, what? But how?
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
-                    <h2>2013</h2>
+                    <h2>Yelp 2013</h2>
                     <ul>
-                        <li>Start moving backend code to services</li>
-                        <li>Provide an API to our monolith</li>
+                        <li>Backend Services</li>
+                        <li>Monolith API</li>
+                        <li>Everything New &rarr; Service</li>
                     </ul>
+<aside class="notes">
+<pre>
+- In 2013, we started with our backend
+- If you go down this route, you'll most likely also want to make your monolith
+have an API
+- Everything new, we obviously a service
+</pre>
+</aside>
                 </section>
-                <section class="left-align">
-                    <h2>Backend Services are Hard</h2>
-                    <ul>
-                        <li>Availability</li>
-                        <li>Performance</li>
-                        <li>Complex Queries</li>
-                    </ul>
-                </section>
-                <!--<section>
-                    <pre><code>
-    user = DB.select(…)
-    business = DB.select(…)
-
-    review = DB.select(…).where(
-        business_id=business.id,
-        user_id=user.id
-    )
-
-    render(user, review, business)
-                    </code></pre>
-                    <img style="height:300px;margin-left:auto;margin-right:auto;display: block" src="assets/darwin.png">
+                <section>
+                    <img src="assets/backend-diagram.png">
+<aside class="notes">
+<pre>
+- This is where we were going
+- Turns out pulling out the backend isn't easy
+</pre>
+</aside>
                 </section>
                 <section class="center">
-                    <pre><code>
-    user, business = async(
-        get_user(),
-        get_business()
-    )
+                    <h2>Backend Service Problems</h2>
+                    <p>Availability, Performance, Query Complexity</p>
+                </section>
+                <section class="center">
+                    <pre><code class="python">
+    def most_recent_review_for_user(user_id)
 
-    review = get_review(
-        business_id=business.id,
-        user_id=user.id
-    )
+        business, review = DB.query('
+            SELECT *
+            FROM review
+            JOIN user ON user.id=review_archive.user_id
+            JOIN business ON review.business_id=business.id
+            WHERE user.id=${user_id}
+            ORDER BY review.time_created
+            LIMIT 1;
+        ', user_id)
 
-    render(user, review, business)
+        return business, review
+
                     </code></pre>
-                </section>-->
-                <section class="left-align">
+                    <h3 class="fragment">You'll Need Frontend/Product Help</h3>
+<aside class="notes">
+<pre>
+- You'll need help from Frontend Engineers, Product Managers and Designers
+to decide how to handle availability
+</pre>
+</aside>
+                </section>
+                <section class="center">
                     <h2>2014</h2>
-                    <ul>
-                        <li>~100 Production Backend Services</li>
-                        <li>200 &rarr; 300 Developers</li>
-                        <li>60,000 Tests, 500 Selenium Tests</li>
-                    </ul>
+                    <p>Something Still Isn't Right...</p>
+<aside class="notes">
+<pre>
+- In 2014, we still felt like something wasn't quite right.
+</pre>
+</aside>
                 </section>
-                <section class="left-align">
-                    <h2>We're Missing Something</h2>
-                    <ul>
-                        <li>Feature development is still slow</li>
-                        <li>User impact dependant on the monolith</li>
-                    </ul>
+                <section>
+                    <img src="assets/backend-diagram.png">
+<aside class="notes">
+<pre>
+- Let's say we get to this world where the backend is well isolated
+- The critical path from User to the Backend Still requires the monolith
+- If we want to have use impact, you need a frontend
+</pre>
+</aside>
                 </section>
-                <section class="left-align">
+
+                <section class="center">
                     <h2>Frontend Services</h2>
-                    <ul>
-                        <li>Services that render HTML</li>
-                        <li>Need same look and feel as existing product</li>
-                        <li>Can be slightly out of sync (temporarily)</li>
-                    </ul>
-                </section>
-               <!--<section>
-                    <h2>Focus on why</h2>
-                    <ul>
-                        <li>We want a more stable product</li>
-                        <li>We want moving to be fast</li>
-                        <li>We want faster deployments</li>
-                    </ul>
-                </section>-->
-                <section class="left-align">
-                    <h2>Best Approach</h2>
-                    <ul>
-                        <li>Focus on making movement fast</li>
-                        <li>Make libraries from existing code</li>
-                        <li>Leverage backend services</li>
-                        <li>Don't over engineer be agile</li>
-                        <li>Should be 50% faster next time</li>
-                    </ul>
+                    <p>HTML Rendering Services</p>
+<aside class="notes">
+<pre>
+- That's when we decided we need to make Frontend Services
+- These services would return HTML instead of JSON
+- Users would be able to go from the routing layer directly to a UI outside of the monlith
+- And our product teams would be able to iterate extremely quickly on this well isolated
+section of a site
+</pre>
+</aside>
                 </section>
                 <section class="left-align">
-                    <h2>Tech Stack</h2>
+                    <h2>Frontend Isn’t Easy Either</h2>
                     <ul>
-                        <li>Pyramid Web Framework</li>
-                        <li>bower and PyPi</li>
-                        <li>yelp_cheetah</li>
-                        <li>libsass</li>
+                        <li>Very few talks about Frontend SOA</li>
+                        <li>Keep Product Consistency</li>
+                        <li>SOA Education</li>
                     </ul>
+<aside class="notes">
+<pre>
+- Very few engineers talk about Frontend SOA (Service Orient Arch!)
+- Unlike backend services, you can't just pick any technology to render JSON
+- You'll want to make user transitions between the monolith and services seamless
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <h2>Where did we start?</h2>
                     <ul>
-                        <li>Google Closure Compiler</li>
-                        <li>pytest/karma</li>
-                        <li>swagger</li>
-                        <li>Jenkins/TravisCI</li>
+                        <li>Move fast, fail early</li>
+                        <li>A page as a unit</li>
+                        <li>Make it faster next time</li>
+                        <li>Leverage existing SOA</li>
+                    </ul>
+<aside class="notes">
+<pre>
+- We're probably going to make mistakes, make them really early
+- We decided to move 1 page at a time from the monolith to a service
+- Whatever we move, should make the next things faster to mvoe
+- Don't reinvent the wheel, try to use the existing serivce stack
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <h2>git://services/styleguide</h2>
+<aside class="notes">
+<pre>
+- We decided to use our styleguide as our first page
+</pre>
+</aside>
+                </section>
+                <section>
+                    <img src="assets/styleguide.png">
+                    <p><a href="http://yelp.com/styleguide">yelp.com/styleguide</a></p>
+<aside class="notes">
+<pre>
+- If you haven't seen it before, check it out.
+- It's basically like bootstrap on steroids specifically for Yelp
+</pre>
+</aside>
+                </section>
+                <section class="no-background center">
+                    <img src="assets/headers.png">
+<aside class="notes">
+<pre>
+- It contains a lot of the simple things like different headers
+</pre>
+</aside>
+                </section>
+                <section>
+                    <img src="assets/yelp-objects.png">
+<aside class="notes">
+<pre>
+- Also more complicated widgets like all the ways we show users on yelp.com
+- Our Product managers, designers and engineers all use our styleguide for documentation
+- and creating a common design language
+- It also helps our designers to avoid reinventing a existing frontend pattern
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <h2>git://services/styleguide</h2>
+                    <ul>
+                        <li>No backend</li>
+                        <li>English only</li>
+                        <li>Low Impact</li>
+                        <li>Renders everything useful</li>
+                    </ul>
+                    <aside class="notes">
+<pre>
+There we a number of reasons to pull the styleguide first
+- Absolutely no backend
+- It's 1 of the only english only pages on yelp
+- If we break it, it's not a disaster
+- Renders most of the useful stuff
+- Will make the next page fast on the frontend
+</pre>
+                    </aside>
+                </section>
+                </section>
+                <section class="left-align">
+                    <h2>How do we share code?</h2>
+                    <ul>
+                        <li>git://yelp-main</li>
+                        <li>git://services/styleguide</li>
+                    </ul>
+<aside class="notes">
+<pre>
+- So we spun up this new service
+- We needed a way to share code between the monolith and the new service
+- Just like with backend services, libraries are going to be the answer for code sharing
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <div style="height:300px">
+                        <img style="margin-right:2em" src="assets/python.png">
+                        <img src="assets/bower.png">
+                    </div>
+                    <h2>PyPi + Bower</h2>
+<aside class="notes">
+<pre>
+- For backend code we use PyPI
+- For frontend code we use Bower
+- We run internal versions of both of these package managers inside yelp
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <pre><code>
+    > cat styleguide/bower.json
+    {
+        "name": "service-styleguide",
+        "dependencies": {
+            "jquery": "1.8.2",
+            "yelp_styleguide": "0.10.3"
+        }
+    }
+                    </code></pre>
+<aside class="notes">
+<pre>
+- In every service, we include a file called bower.json
+- In the case of the styleguide service, it's really simple
+- the service is a simple wrapper providing documentation for our library called yelp_styleguide
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <pre><code class="no-highlight">
+    $ bower install
+    ...
+    bower jquery#1.8.2              install jquery#1.8.2
+    bower yelp_styleguide#0.10.3    install yelp_styleguide#0.10.3
+    ...
+
+    $ tree bower_components/ -L 1
+    bower_components/
+    ├── jquery
+    ├── yelp_styleguide
+                    </code></pre>
+<aside class="notes">
+<pre>
+- When you run bower install, bower downloads all of the packages
+- and installs them into a directory called bower_components
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <h2>yelp_styleguide</h2>
+                    <ul>
+                        <li>SCSS (underscored)</li>
+                        <li>JavaScript</li>
+                        <li>Images/Icons</li>
+                        <li>Tests</li>
+                        <li>bower.json</li>
+                    </ul>
+                </section>
+                <section class="left-align">
+                    <pre><code>
+    @import "bower_components/yelp_styleguide/assets/scss/grid_layout";
+                    </code></pre>
+<aside class="notes">
+<pre>
+- That library is now available inside the service code
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <h2>Releasing Styleguide Service</h2>
+                    <ul>
+                        <li>Trivial HTTP proxy in monolith</li>
+                        <li>Delete all code/tests in monolith</li>
                     </ul>
                 </section>
                 <section class="center">
-                    <h2>Where did we start?</h2>
+                    <h2>Service Tips</h2>
+<aside class="notes">
+<pre>
+- A couple protips that we've found are important for both stability and developers sanity
+</pre>
+</aside>
                 </section>
-                <section class="no-background center">
-                    <img src="assets/google-styleguide.png">
+                <section class="center">
+                    <h2>Semantic Versioning</h2>
+                    <p>MAJOR.MINOR.PATCH</p>
+<aside class="notes">
+<pre>
+- Use semantic versioning on libraries
+- The MAJOR version tells you if there's an incompatible API change
+- The MINOR version tells you if there was functionality added but nothing backward incompatable
+- The PATCH version tells you a bug fix was made
+</pre>
+</aside>
                 </section>
-                <section class="no-background center">
-                    <img src="assets/styleguide.png">
+                <section class="left-align">
+                    <h2>Example</h2>
+                    <ol>
+                        <li>1.8.2 &rarr; 1.8.3</li>
+                        <li>1.8.5 &rarr; 1.9.3</li>
+                        <li>1.9.1 &rarr; 2.0.0</li>
+                    </ol>
+<aside class="notes">
+<pre>
+- In the first example jump from one version to another should just fix problems
+- The second example you'll have a new API but everything else should continue to work
+- The third example you need to make sure you update your code to handle the changes
+</pre>
+</aside>
+                </section>
+                <section class="left-align">
+                    <h2>Semver in Bower</h2>
+                    <ol>
+                        <li>*</li>
+                        <li>1.8 - 1.9</li>
+                        <li>~1</li>
+                        <li>1.9.2</li>
+                    </ol>
+<aside class="notes">
+<pre>
+- You can make libraries and services have various restrictions on what versions they use
+- For example in the first example we're saying I need jQuery, I don't care what version
+- in the second example we're saying, anything from 1.8-1.9 is fine, any patches between are acceptable
+- in the third that syntax says anything in the 1 release is fine, minors and patches are good
+- in the last example we're being very explicit, we only work with the 2nd patch version of 1.9
+</pre>
+</aside>
+                </section>
+                <section class="center">
+                    <h2>Dep Management</h2>
+                    <img class="center" src="assets/service-deps.png">
+                </section>
+                <section class="left-align">
+                    <h2>Min Versions in Libraries</h2>
+                    <pre><code>
+    > cat yelp_styleguide/bower.json
+    {
+        "name": "yelp_styleguide",
+        "dependencies": {
+            "jquery": ">=1.8",
+        }
+    }
+                    </code></pre>
+                </section>
+                <section class="left-align">
+                    <h2>Build/Test Libraries Daily</h2>
+                    <br>
+                    <h3>On Failure:</h3>
+                    <div style="float: left;">
+                    <ul>
+                        <li>Make your library compatible</li>
+                        <li>... or add a max version</li>
+                        <li>Release a new version</li>
+                    </ul>
+                   </div>
+                    <img style="float:right" src="assets/jenkins_logo.png">
+                </section>
+                <section class="left-align">
+                    <h2>Pin Deps in Services</h2>
+                    <pre><code>
+    > cat styleguide/bower.json
+    {
+        "name": "service-styleguide",
+        "dependencies": {
+            "jquery": "1.8.2",
+            "yelp_styleguide": "0.10.3"
+        }
+    }
+                    </code></pre>
+                </section>
+                <section class="center">
+                    <h2>We Made Mistakes</h2>
+                    <p>Let's make a monolith!</p>
                 </section>
                 <section class="no-background center">
                     <img src="assets/brand.png">
                 </section>
-                <section class="no-background center">
-                    <img src="assets/headers.png">
+                <section class="left-align">
+                    <img src="assets/screenshots/user_details_friends.png">
                 </section>
-                <section class="no-background center">
-                    <img src="assets/careers.png">
-                </section>
-                <section class="no-background center">
-                    <h2>30+ Pages Overnight</h2>
-                </section>
-                <section class="no-background center">
-                    <img src="assets/user_details.png">
-                </section>
-                <section>
-                    <h2>What's next?</h2>
-                    <ul>
-                        <li>Mobile API as a Service</li>
-                        <li>Continue extracting libraries</li>
-                        <li>Enable more developers</li>
-                    </ul>
+                <section data-background-image="assets/tiles.png" class="center">
+                    <h2>
+                        <span style="padding: 0.5em; border-radius: 0.5em; background-color: #3b65a7; color:#fff;">30+ Pages Overnight</span>
+                    </h2>
                 </section>
                 <section class="center">
                     <h2 class="center">Thanks!</h2>
@@ -296,34 +772,6 @@
                 <section class="title-slide">
                     <img style="display:block; float:left; width:49%" src="assets/logo.png">
                     <img style="display:block; float:right; width:49%" src="assets/social.png">
-                </section>
-                <section>
-                    <h2 class="center">yelp.com/dataset_challenge</h2>
-                    <img style="display:block; float:left; width:40%" src="assets/dataset.png">
-                    <div style="display:block; float:left; width:50%; font-size:0.5em; padding: 1em; line-height: 0.8em">
-                        <p style="font-size:1.4em;">Academic dataset from 10 cities in 4 countries!</p>
-                        <ul style="float: left; width: 50%">
-                            <li>61K businesses</li>
-                            <li>61K checkin-sets</li>
-                            <li>481K business attributes</li>
-                            <li>1.6M reviews</li>
-                        </ul>
-                        <ul style="float: right; width: 40%">
-
-                            <li>366K users</li>
-                            <li>2.8M edge social-graph</li>
-                            <li>495K tips</li>
-                        </ul>
-                    </div>
-                    <div class="center" style="clear: both">
-                    <p>
-                        Your academic project, research or visualizations, submitted by Dec 31, 2015<br>
-                        =<br>
-                        $5,000 prize + $1,000 for publication + $500 for presenting*<br>
-
-                        *See full terms on website<br>
-                    </p>
-                    </div>
                 </section>
             </div>
         </div>
@@ -334,6 +782,11 @@
         <script src="bower_components/highlightjs/highlight.pack.js"></script>
         <script src="bower_components/chartist/dist/chartist.js"></script>
         <script type="text/javascript">
+            MathJax.Hub.Config({
+                "HTML-CSS": {
+                    scale: 150
+                }
+            });
             $('section')
                     .attr('data-background', "assets/background.png");
             $('section.no-background')
@@ -369,13 +822,13 @@
                     labels.push(i);
                     series.push(Math.floor(Math.pow((99/100), i) * 100));
                 }
+
                 new Chartist.Line('.ct-chart', {
                     labels: labels,
-                    showPoint: false,
                     height: '500px',
                     series: [series]
                 }, {
-                    height: '200px',
+                    height: '400px',
                     chartPadding: {
                         right: '10px',
                         bottom: '20px'

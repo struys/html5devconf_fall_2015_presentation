@@ -1,5 +1,8 @@
 all: scss bower_components
 
+serve: scss bower_components
+	sh -c ". venv/bin/activate && python -m SimpleHTTPServer"
+
 .PHONY: scss
 scss: build/presentation.css
 
