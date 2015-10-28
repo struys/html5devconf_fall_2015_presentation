@@ -14,6 +14,6 @@ cp ../.travis.yml .
 # Website
 cp -R ../build ../bower_components ../index.html ../assets .
 
-git add .
-git commit -m "Deployed ${TRAVIS_BUILD_NUMBER} to Github Pages"
-git push -q origin HEAD >& /dev/null
+git add . >& /dev/null
+git commit -m "Deployed ${TRAVIS_BUILD_NUMBER} to Github Pages" >& /dev/null
+git push origin HEAD
