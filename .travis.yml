@@ -1,0 +1,15 @@
+language: python
+python:
+  - "2.7"
+script: make
+branches:
+  except:
+    - gh_pages
+env:
+  global:
+    - GH_REF: github.com/struys/html5devconf_fall_2015_presentation
+    # GH_TOKEN
+    - secure: XuVkf+w756Kg52c5bFlSABsUHQS1lul3haOI+YpKCOOUBpNVS5Cv4KjmlK58WhFbLtM79RhRyiCbZDyTuUJT3lZGDoxshkJ0YKNUlzVjMRIvuoSnD84dHVvRmE3k0ej1lda1F0oDMOow98DFFtJzUPtcdBlwnfL4dCrBaCQ5NVK2UgBGLB5GTRbPphLsb1pdUO2KvxAeXMfmrzkTwZ5S6SQTf5SsQHS+BT8o3v6iD+PBhGvgYn00xer5QujGGbmQtvttBVv7vHGIoxr0FI3Whd3Pe6uk4tCVw7gvq0JIFcK1LA0K/NEgpUuvfIwDq0JuOVhu96KiCTTa1mT1J3ZhkaBXgEX+xHlYQfqlawGHSPp4t8ZlC9kw7mKKs/hGDcwTp6ljGNv1Gyf/IpMyoNJ2P06FfXWAxq1zgFQRv9clV0vkZr7QYcDj1In77zS927blzpLpGZtpQYwpoL1YZLn9B6sMSHGTlmEFGlFEZjtEAXStNfbL5tmxPVie07PQil4uSn35B8acc07pGAQ2312Vy1DIgTp7maKhf3N0GgoQXigGSszWtg6yrXvwnwicOAhsz6E2DQLKNKB9ir5+0FD7pURb07IFHN4cCKUR8hrpsgmuQCbyfDbWXiACPmJWE3snJ5aMJ2wJYTZ2yTmrZWjbGjCokp7yXkCZmccCZoAie0E=
+after_success:
+  - bash push_to_gh.sh
+sudo: false
